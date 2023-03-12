@@ -1,0 +1,1 @@
+# MinimalASP.NETCore6
