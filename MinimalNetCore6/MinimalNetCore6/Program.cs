@@ -19,9 +19,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPostArray();
+// app.MapPostArray();
 
-app.MapArray();
+// app.MapArray();
+
+///////////////////////////////////////
+
+app.MapTodoitems();
 
 app.Run();
 
@@ -35,3 +39,13 @@ public class SetArray
 {
     public int[]? ArrayNumber { get; set;}
 }
+
+class Todo
+{
+    public int Id { get; set; }
+    public string? Product { get; set; }
+    public double Price { get; set; }
+    public bool IsComplete { get; set; }
+
+}
+
