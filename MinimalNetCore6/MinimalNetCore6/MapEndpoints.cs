@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MinimalNetCore6
-{
+{   
     public static class MapEndpoints
     {
-        public static WebApplication MapArray(this WebApplication app)
+        public static void MapPostArray(this WebApplication app)
         {
             app.MapPost("Sort/", ([FromBody] ArrayModel model) =>
             {
@@ -30,8 +32,23 @@ namespace MinimalNetCore6
                     }
                 }
                 return sortedNumber;
-            });
-            return app;
+            });         
         }
+
+        public static void MapArray(this WebApplication app)
+        {
+            List<int> myArray = new List<int>();
+            app.MapPost("Arr/", ([FromBody] SetArray model) =>
+            {
+                var myArr = model.ArrayNumber!.ToArray();
+                myArray.AddRange(myArr);
+                return myArr;
+            });
+            app.MapGet("Arr/", () =>
+            {   
+                return myArray;
+            });
+        }
+
     }
 }

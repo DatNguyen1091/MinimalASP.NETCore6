@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using MinimalNetCore6;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapPostArray();
+
 app.MapArray();
 
 app.Run();
@@ -26,4 +29,9 @@ public class ArrayModel
 {
     public int[]? ArrayNumber { get; set; }
     public int? SortType { get; set; }
+}
+
+public class SetArray
+{
+    public int[]? ArrayNumber { get; set;}
 }
