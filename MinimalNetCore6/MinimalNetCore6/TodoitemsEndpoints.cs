@@ -17,12 +17,6 @@ namespace MinimalNetCore6
                 return Results.Ok(todos);
             });
 
-            app.MapPost("/todoitems", (Todo todo) =>
-            {
-                todos.Add(todo);
-                return Results.Created($"/todoitems/{todo.Id}", todo);
-            });
-
             app.MapGet("/todoitems/complete", () =>
             {
                 return Results.Ok(todos.Where(t => t.IsComplete));
@@ -32,11 +26,17 @@ namespace MinimalNetCore6
             {
                 var todo = todos.Find(t => t.Id == id);
                 if (todo != null)
-                {                   
+                {
                     return Results.Ok(todo);
                 }
                 else
                     return Results.NotFound();
+            });
+
+            app.MapPost("/todoitems", (Todo todo) =>
+            {
+                todos.Add(todo);
+                return Results.Created("/todoitems", todo);
             });
 
             app.MapPut("/todoitems/{id}", (int id, Todo inputTodo) =>
